@@ -1,12 +1,11 @@
-conn = new Mongo("localhost:27017")
+const conn = new Mongo("localhost:27017")
 
-db = conn.getDB("optica")
+const db = conn.getDB("optica")
 
 db.dropDatabase()
 
 db.proveedores.insertMany([
   {
-    _id: ObjectId("60dc437a1e63992e9eb1c968"),
     nombre: "Proveedor1",
     telefono: "937775645",
     fax: "937775646",
@@ -22,8 +21,7 @@ db.proveedores.insertMany([
     nif: 83411652
   },
   {
-    _id: ObjectId("60dc437a1e63992e9eb1c969"),
-    nombre: "Proveedor1",
+    nombre: "Proveedor2",
     telefono: "937775645",
     fax: "937775646",
     direccion: {
@@ -38,13 +36,14 @@ db.proveedores.insertMany([
     nif: 72300641
   }
 ])
+const proveedor1Id = db.proveedores.findOne({nombre: "Proveedor1"})._id
+const proveedor2Id = db.proveedores.findOne({nombre: "Proveedor2"})._id
 
 db.clientes.insertMany([
   {
-    _id: ObjectId("60dc441ac750534eb3615057"),
     telefono: 123,
-    email: "abcde@gmail.com",
-    fecha_registro: "23-03-2021 14:00:00",
+    email: "abcdefghi@gmail.com",
+    fecha_registro: new Date("2021-03-23"),
     direccion: {
       calle: "Bonanova",
       numero: 321,
@@ -57,10 +56,9 @@ db.clientes.insertMany([
     referido: null
   },
   {
-    _id: ObjectId("60dc441ac750534eb3615058"),
     telefono: 123,
     email: "abcde@gmail.com",
-    fecha_registro: "06-05-2021 14:00:00",
+    fecha_registro: new Date("2021-05-06"),
     direccion: {
       calle: "Meridiana",
       numero: 21,
@@ -69,14 +67,16 @@ db.clientes.insertMany([
       ciudad: "Barcelona",
       cpostal: 00002,
       pais: "ES"
-    },
-    referido: ObjectId("60dc441ac750534eb3615057")
+    }
   }
 ])
+const cliente1Id = db.clientes.findOne({email: "abcdefghi@gmail.com"})._id
+const cliente2Id = db.clientes.findOne({email: "abcde@gmail.com"})._id
+
+db.clientes.updateOne({email: "abcde@gmail.com"}, {$set: {referido: cliente1Id}})
 
 db.gafas.insertMany([
   {
-    _id: ObjectId("60dc4457c750534eb3615059"),
     graduacion_derecha: 1.2,
     graduacion_izquierda: 1.4,
     montura: "pasta",
@@ -84,15 +84,14 @@ db.gafas.insertMany([
     crista_color: "transparente",
     precio: 79.99,
     marca: "Ray-B",
-    fecha_venta: "23-03-2021 14:00:00",
-    proveedor: ObjectId("60dc437a1e63992e9eb1c968"),
-    cliente: ObjectId("60dc441ac750534eb3615057"),  
+    fecha_venta: new Date("2021-03-23"),
+    proveedor: proveedor1Id,
+    cliente: cliente1Id,  
     empleado: {
       nombre: "Juan Martínez"
     }
   },
   {
-    _id: ObjectId("60dc4457c750534eb361505a"),
     graduacion_derecha: 2.2,
     graduacion_izquierda: 2.1,
     montura: "flotante",
@@ -100,9 +99,9 @@ db.gafas.insertMany([
     crista_color: "oscuro",
     precio: 59.99,
     marca: "Ray-B",
-    fecha_venta: "06-05-2021 11:00:00",
-    proveedor: ObjectId("60dc437a1e63992e9eb1c969"),
-    cliente: ObjectId("60dc441ac750534eb3615058"),  
+    fecha_venta: new Date("2021-05-06"),
+    proveedor: proveedor2Id,
+    cliente: cliente2Id,  
     empleado: {
       nombre: "Juan Martínez"
     }
