@@ -15,7 +15,7 @@ const usuarios = [
     canal: {
       nombre: "Canal de Dan",
       descripcion: "Canal de temas diversos",
-      fechaCreacion: new Date(),
+      fechaCreacion: new Date("2020-01-01"),
       suscriptores: []
     }
   },
@@ -29,7 +29,7 @@ const usuarios = [
     canal: {
       nombre: "Canal de kent",
       descripcion: "Canal de temas aún más diversos",
-      fechaCreacion: new Date(),
+      fechaCreacion: new Date("2020-01-01"),
       suscriptores: []
     }
   },
@@ -59,8 +59,11 @@ const user2 = db.usuarios.findOne({username: "kentcdodds"})._id
 const user3 = db.usuarios.findOne({username: "elonmusk"})._id
 const user4 = db.usuarios.findOne({username: "linustorvalds"})._id
 
-db.usuarios.updateOne({username: "danabramov"}, {$set: {canal: {suscriptores: [user2, user3]}}})
-db.usuarios.updateOne({username: "kentcdodds"}, {$set: {canal: {suscriptores: [user1, user3, user4]}}})
+// { _id: 1, grades: 80 },
+// { $set: { "grades.$" : 82 } }
+
+db.usuarios.updateOne({username: "danabramov"}, { $set: {"canal.suscriptores": [user2, user3] }})
+db.usuarios.updateOne({username: "kentcdodds"}, { $set: { "canal.suscriptores": [user1, user3, user4]}})
 
 const videos = [
   {

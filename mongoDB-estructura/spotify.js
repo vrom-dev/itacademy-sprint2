@@ -30,7 +30,7 @@ const usuarios = [
     artistasFavoritos: [],
     cancionesFavoritas: [],
     albumsFavoritos: [],
-    playlists: []
+    playlistsFavoritas: []
   },
   {
     username: "jesse",
@@ -44,7 +44,7 @@ const usuarios = [
     artistasFavoritos: [],
     cancionesFavoritas: [],
     albumsFavoritos: [],
-    playlists: []
+    playlistsFavoritas: []
   },
   {
     username: "gus",
@@ -76,7 +76,7 @@ const usuarios = [
     artistasFavoritos: [],
     cancionesFavoritas: [],
     albumsFavoritos: [],
-    playlists: []
+    playlistsFavoritas: []
   },
   {
     username: "saul",
@@ -90,7 +90,7 @@ const usuarios = [
     artistasFavoritos: [],
     cancionesFavoritas: [],
     albumsFavoritos: [],
-    playlists: []
+    playlistsFavoritas: []
   },
 ]
 db.usuarios.insertMany(usuarios)
@@ -216,21 +216,21 @@ db.playlists.updateOne({_id: playlist2._id}, {$set: {canciones: [songs2[1]._id, 
 db.playlists.updateOne({_id: playlist3._id}, {$set: {canciones: [songs2[1]._id, songs1[1]._id, songs1[2]._id, songs2[2]._id, songs1[0]._id]}})
 
 db.usuarios.updateOne({_id: user1}, {$set: {cancionesFavoritas: [songs1[0]._id, songs2[0]._id]}})
-db.usuarios.updateOne({_id: user1}, {$set: {playlists: [playlist1._id, playlist2._id]}})
+db.usuarios.updateOne({_id: user1}, {$set: {playlistsFavoritas: [playlist1._id, playlist2._id]}})
 db.usuarios.updateOne({_id: user1}, {$set: {artistasFavoritos: [artist1._id]}})
 db.usuarios.updateOne({_id: user1}, {$set: {albumsFavoritos: [artist1.albums[0]._id]}})
 
 db.usuarios.updateOne({_id: user2}, {$set: {cancionesFavoritas: [songs2[1]._id, songs1[1]._id]}})
-db.usuarios.updateOne({_id: user2}, {$set: {playlists: [playlist3._id]}})
+db.usuarios.updateOne({_id: user2}, {$set: {playlistsFavoritas: [playlist3._id]}})
 db.usuarios.updateOne({_id: user2}, {$set: {artistasFavoritos: [artist1._id, artist2._id]}})
 db.usuarios.updateOne({_id: user2}, {$set: {albumsFavoritos: [artist2.albums[0]._id]}})
 
 db.usuarios.updateOne({_id: user3}, {$set: {cancionesFavoritas: [songs2[1]._id, songs1[1]._id, songs2[2]._id]}})
-db.usuarios.updateOne({_id: user3}, {$set: {playlists: [playlist1._id, playlist2._id, playlist3._id]}})
+db.usuarios.updateOne({_id: user3}, {$set: {playlistsFavoritas: [playlist1._id, playlist2._id, playlist3._id]}})
 db.usuarios.updateOne({_id: user3}, {$set: {artistasFavoritos: [artist2._id]}})
 
 db.usuarios.updateOne({_id: user4}, {$set: {cancionesFavoritas: [songs2[1]._id, songs1[1]._id, songs1[2]._id, songs1[0]._id]}})
-db.usuarios.updateOne({_id: user4}, {$set: {playlists: [playlist2._id]}})
+db.usuarios.updateOne({_id: user4}, {$set: {playlistsFavoritas: [playlist2._id]}})
 db.usuarios.updateOne({_id: user4}, {$set: {artistasFavoritos: [artist1._id]}})
 db.usuarios.updateOne({_id: user4}, {$set: {albumsFavoritos: [artist1.albums[0]._id, artist2.albums[0]._id]}})
 

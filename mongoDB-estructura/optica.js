@@ -4,11 +4,11 @@ const db = conn.getDB("optica")
 
 db.dropDatabase()
 
-db.clientes.insertMany([
+const clientes = [
   {
-    telefono: 123,
+    telefono: 600454545,
     email: "abcdefghi@gmail.com",
-    fecha_registro: new Date("2021-03-23"),
+    fechaRegistro: new Date("2021-03-23"),
     direccion: {
       calle: "Bonanova",
       numero: 321,
@@ -21,9 +21,9 @@ db.clientes.insertMany([
     referido: null
   },
   {
-    telefono: 123,
+    telefono: 600121212,
     email: "abcde@gmail.com",
-    fecha_registro: new Date("2021-05-06"),
+    fechaRegistro: new Date("2021-05-06"),
     direccion: {
       calle: "Meridiana",
       numero: 21,
@@ -35,23 +35,24 @@ db.clientes.insertMany([
     },
     referido: null
   }
-])
+]
+db.clientes.insertMany(clientes)
 const cliente1Id = db.clientes.findOne({email: "abcdefghi@gmail.com"})._id
 const cliente2Id = db.clientes.findOne({email: "abcde@gmail.com"})._id
 
 db.clientes.updateOne({email: "abcde@gmail.com"}, {$set: {referido: cliente1Id}})
 
-db.gafas.insertMany([
+const gafas = [
   {
     cliente: cliente1Id,  
-    graduacion_derecha: 1.2,
-    graduacion_izquierda: 1.4,
+    graduacionDerecha: 1.2,
+    graduacionIzquierda: 1.4,
     montura: "pasta",
-    montura_color: "negro",
-    crista_color: "transparente",
+    monturaColor: "negro",
+    cristaColor: "transparente",
     precio: 79.99,
     marca: "Ray-B",
-    fecha_venta: new Date("2021-03-23"),
+    fechaVenta: new Date("2021-03-23"),
     proveedor: {
       nombre: "Proveedor1",
       telefono: "937775645",
@@ -73,14 +74,13 @@ db.gafas.insertMany([
   },
   {
     cliente: cliente2Id,  
-    graduacion_derecha: 2.2,
-    graduacion_izquierda: 2.1,
+    graduacionDerecha: 2.2,
+    graduacionIzquierda: 2.1,
     montura: "flotante",
-    montura_color: "rojo",
-    crista_color: "oscuro",
+    monturaColor: "rojo",
     precio: 59.99,
     marca: "Ray-B",
-    fecha_venta: new Date("2021-05-06"),
+    fechaVenta: new Date("2021-05-06"),
     proveedor: {
       nombre: "Proveedor2",
       telefono: "937775645",
@@ -100,4 +100,5 @@ db.gafas.insertMany([
       nombre: "Juan Martínez"
     }
   }
-])
+]
+db.gafas.insertMany(gafas)

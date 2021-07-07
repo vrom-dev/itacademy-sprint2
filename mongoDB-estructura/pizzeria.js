@@ -13,8 +13,7 @@ const clientes = [
     localidad: {
       nombre: "Mataró",
       provincia: "Barcelona"
-    },
-    pedidos: []
+    }
   },
   {
     nombre: "Laura",
@@ -24,11 +23,13 @@ const clientes = [
     localidad: {
       nombre: "Barcelona",
       provincia: "Barcelona"
-    },
-    pedidos: []
+    }
   },
 ]
 db.clientes.insertMany(clientes)
+
+const cliente1 = db.clientes.findOne({nombre: "Luis"})._id
+const cliente2 = db.clientes.findOne({nombre: "Laura"})._id
 
 const tiendas = [
   {
@@ -149,6 +150,12 @@ const productos = [
 ]
 db.productos.insertMany(productos)
 
+const agua = db.productos.findOne({nombre: "Agua"})._id
+const volldamm = db.productos.findOne({nombre: "Voll Damm"})._id
+const pizzabbq = db.productos.findOne({nombre: "Pizza BBQ"})._id
+const pizzamargherita = db.productos.findOne({nombre: "Pizza margherita"})._id
+const pizzacarbonara = db.productos.findOne({nombre: "Pizza carbonara di guanciale"})._id
+
 const pedidos = [
   {
     fecha: new Date("2021-06-27T14:00:00Z"),
@@ -156,36 +163,29 @@ const pedidos = [
     precioTotal: 27.20,
     detalle: [
       {
-        producto: {
-          nombre: "Agua",
-          precio: 1.50
-        }, 
+        producto: agua,
+        precio: 1.50,
         cantidad: 1
       },
       {
-        producto: {
-          nombre: "Voll Damm",
-          precio: 1.90
-        },
+        producto: volldamm,
+        precio: 1.90,
         cantidad: 1
       },
       {
-        producto: {
-          nombre: "Pizza BBQ",
-          precio: 12.90
-        },
+        producto: pizzabbq,
+        precio: 12.90,
         cantidad: 1
       },
       {
-        producto: {
-          nombre: "Pizza margherita",
-          precio: 10.90
-        },
+        producto: pizzamargherita,
+        precio: 10.90,
         cantidad: 1
       }
     ],
     reparto: null,
-    tienda: tienda2
+    tienda: tienda2,
+    cliente: cliente1
   },
   {
     fecha: new Date("2021-06-28T13:30:00Z"),
@@ -193,17 +193,13 @@ const pedidos = [
     precioTotal: 15.90,
     detalle: [
       {
-        producto: {
-          nombre: "Agua",
-          precio: 1.50
-        }, 
+        producto: agua,
+        precio: 1.50,
         cantidad: 2
       },
       {
-        producto: {
-          nombre: "Pizza carbonara di guanciale",
-          precio: 12.90
-        },
+        producto: pizzacarbonara,
+        precio: 12.90,
         cantidad: 1
       }
     ],
@@ -214,13 +210,8 @@ const pedidos = [
       },
       horaEntrega: new Date("2021-06-28T14:00:00Z")
     },
-    tienda: tienda1
+    tienda: tienda1,
+    cliente: cliente2
   }
 ]
 db.pedidos.insertMany(pedidos)
-
-const pedido1 = db.pedidos.findOne({precioTotal: 15.90})._id
-const pedido2 = db.pedidos.findOne({precioTotal: 27.20})._id
-
-db.clientes.updateOne({nombre: "Luis"}, {$set:{pedidos: [pedido2]}})
-db.clientes.updateOne({nombre: "Laura"}, {$set:{pedidos: [pedido1]}})
